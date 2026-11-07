@@ -1,0 +1,18 @@
+# Build output
+build/
+out/
+cmake-build-*/
+
+# Visual Studio / VS Code
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Binaries
+*.exe
+*.obj
+*.o
+*.a
+*.lib
+*.pdb

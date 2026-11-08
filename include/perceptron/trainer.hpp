@@ -8,15 +8,15 @@
 
 namespace perceptron {
 
-/// One labeled training example.
+//Um exemplo de treinamento.
 struct Sample {
     std::vector<double> input;
     double target;
 };
 
 struct TrainResult {
-    std::size_t epochs;  ///< Epochs executed (including the final error-free one).
-    bool converged;      ///< True if an epoch finished with zero mistakes.
+    std::size_t epochs;  ////< Épocas executadas (incluindo a última sem erros).
+    bool converged;     ///< TRUE se uma época terminou sem erros.
 };
 
 /// Trains the neuron with the perceptron rule, visiting samples in order.

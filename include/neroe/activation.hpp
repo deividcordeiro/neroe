@@ -2,10 +2,10 @@
 
 namespace neroe {
 
-/// Activation function: maps the pre-activation value z = w.x + b to the neuron output.
+/// /// Função de ativação: mapeia o valor de pré-ativação z = w.x + b para a saída do neurônio.
 using Activation = double (*)(double);
 
-/// Heaviside step function: 1.0 if z >= 0, otherwise 0.0.
+/// Função degrau de Heaviside: 1,0 se z >= 0, caso contrário 0,0.
 inline double step(double z) noexcept { return z >= 0.0 ? 1.0 : 0.0; }
 
 }  // namespace neroe

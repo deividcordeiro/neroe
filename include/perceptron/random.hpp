@@ -8,10 +8,11 @@ namespace perceptron {
 /// Pequeno, rápido e totalmente determinístico entre compiladores e plataformas,
 /// o que torna experimentos (e depois, execuções evolucionárias) reproduzíveis.
 class Xorshift32 {
-public:
+   public:
     static constexpr std::uint32_t kDefaultSeed = 2463534242u;
 
-    /// Uma semente zero iria travar o gerador em zero, então ela é substituída pelo padrão.
+    /// Uma semente zero iria travar o gerador em zero, então ela é substituída pelo
+    /// padrão.
     explicit Xorshift32(std::uint32_t seed = kDefaultSeed) noexcept
         : state_(seed != 0 ? seed : kDefaultSeed) {}
 
@@ -22,17 +23,15 @@ public:
         return state_;
     }
 
-    /// Uniform double in [0, 1).
     double next_double() noexcept {
         return static_cast<double>(next_u32()) / 4294967296.0;
     }
 
-    /// Uniform double in [lo, hi).
     double uniform(double lo, double hi) noexcept {
         return lo + (hi - lo) * next_double();
     }
 
-private:
+   private:
     std::uint32_t state_;
 };
 

@@ -1,6 +1,6 @@
-// Trains a single perceptron on AND, OR and XOR.
-// AND and OR are linearly separable -> the neuron learns them.
-// XOR is not -> a single neuron can never learn it.
+// Treina um único perceptron em AND, OR e XOR.
+// AND e OR são linearmente separáveis -> o neurônio aprende.
+// XOR não é -> um único neurônio nunca consegue aprendê-lo.
 
 #include <iostream>
 #include <string>
@@ -20,8 +20,8 @@ void run(const std::string& name, const std::vector<Sample>& data) {
     const TrainResult result = neroe::train(neuron, data, 0.1, 1000);
 
     std::cout << "== " << name << " ==\n"
-              << (result.converged ? "converged" : "did NOT converge")
-              << " after " << result.epochs << " epoch(s)\n"
+              << (result.converged ? "converged" : "did NOT converge") << " after "
+              << result.epochs << " epoch(s)\n"
               << "w = [" << neuron.weights()[0] << ", " << neuron.weights()[1]
               << "], b = " << neuron.bias() << '\n';
 
@@ -36,7 +36,7 @@ void run(const std::string& name, const std::vector<Sample>& data) {
 
 int main() {
     run("AND", {{{0, 0}, 0}, {{0, 1}, 0}, {{1, 0}, 0}, {{1, 1}, 1}});
-    run("OR",  {{{0, 0}, 0}, {{0, 1}, 1}, {{1, 0}, 1}, {{1, 1}, 1}});
+    run("OR", {{{0, 0}, 0}, {{0, 1}, 1}, {{1, 0}, 1}, {{1, 1}, 1}});
     run("XOR", {{{0, 0}, 0}, {{0, 1}, 1}, {{1, 0}, 1}, {{1, 1}, 0}});
     return 0;
 }

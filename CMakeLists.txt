@@ -9,7 +9,6 @@ option(NEROE_BUILD_EXAMPLES "Build examples" ON)
 option(NEROE_BUILD_TESTS "Build tests" ON)
 
 # ---- library -------------------------------------------------------------
-add_library(neroe src/neuron.cpp src/trainer.cpp)
 add_library(neroe src/neuron.cpp src/trainer.cpp src/serialization.cpp)
 add_library(neroe::neroe ALIAS neroe)
 target_include_directories(neroe PUBLIC include)

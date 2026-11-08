@@ -10,6 +10,7 @@ option(NEROE_BUILD_TESTS "Build tests" ON)
 
 # ---- library -------------------------------------------------------------
 add_library(neroe src/neuron.cpp src/trainer.cpp)
+add_library(neroe src/neuron.cpp src/trainer.cpp src/serialization.cpp)
 add_library(neroe::neroe ALIAS neroe)
 target_include_directories(neroe PUBLIC include)
 target_compile_features(neroe PUBLIC cxx_std_20)
@@ -27,7 +28,7 @@ endif()
 if(NEROE_BUILD_TESTS)
     enable_testing()
     add_executable(neroe_tests
-        tests/test_main.cpp tests/test_neuron.cpp tests/test_random.cpp)
+        tests/test_main.cpp tests/test_neuron.cpp tests/test_random.cpp tests/test_serialization.cpp)
     target_link_libraries(neroe_tests PRIVATE neroe)
     add_test(NAME neroe_tests COMMAND neroe_tests)
 endif()

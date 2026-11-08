@@ -5,6 +5,7 @@
 //   TEST(name) { CHECK(condition); CHECK_NEAR(a, b, eps); CHECK_THROWS(expr); }
 
 #include <cmath>
+#include <exception>
 #include <iostream>
 #include <vector>
 
@@ -33,7 +34,15 @@ inline int run_all() {
     std::size_t failed_tests = 0;
     for (const Case& c : registry()) {
         const int before = failures();
-        c.fn();
+        try {
+            c.fn();
+        } catch (const std::exception& e) {
+            std::cerr << "uncaught exception in " << c.name << ": " << e.what() << '\n';
+            ++failures();
+        } catch (...) {
+            std::cerr << "uncaught unknown exception in " << c.name << '\n';
+            ++failures();
+        }
         const bool ok = failures() == before;
         std::cout << (ok ? "[ PASS ] " : "[ FAIL ] ") << c.name << '\n';
         if (!ok) ++failed_tests;
@@ -46,29 +55,28 @@ inline int run_all() {
 
 }  // namespace minitest
 
-#define TEST(name)                                                    \
-    static void name();                                               \
-    static const minitest::Registrar registrar_##name(#name, name);   \
+#define TEST(name)                                                  \
+    static void name();                                             \
+    static const minitest::Registrar registrar_##name(#name, name); \
     static void name()
 
-#define CHECK(cond)                                                          \
-    do {                                                                     \
-        if (!(cond)) {                                                       \
-            std::cerr << __FILE__ << ":" << __LINE__                         \
-                      << ": CHECK failed: " #cond "\n";                      \
-            ++minitest::failures();                                          \
-        }                                                                    \
+#define CHECK(cond)                                                                    \
+    do {                                                                               \
+        if (!(cond)) {                                                                 \
+            std::cerr << __FILE__ << ":" << __LINE__ << ": CHECK failed: " #cond "\n"; \
+            ++minitest::failures();                                                    \
+        }                                                                              \
     } while (0)
 
 #define CHECK_NEAR(a, b, eps) CHECK(std::fabs((a) - (b)) <= (eps))
 
-#define CHECK_THROWS(expr)                                                   \
-    do {                                                                     \
-        bool threw_ = false;                                                 \
-        try {                                                                \
-            (void)(expr);                                                    \
-        } catch (...) {                                                      \
-            threw_ = true;                                                   \
-        }                                                                    \
-        CHECK(threw_);                                                       \
+#define CHECK_THROWS(expr)   \
+    do {                     \
+        bool threw_ = false; \
+        try {                \
+            (void)(expr);    \
+        } catch (...) {      \
+            threw_ = true;   \
+        }                    \
+        CHECK(threw_);       \
     } while (0)

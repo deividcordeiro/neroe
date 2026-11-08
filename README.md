@@ -36,8 +36,10 @@ Já a operação XOR não pode ser aprendida por um único neurônio. Esse exemp
 **Sem CMake (GCC / MinGW / MSYS2):**
 
 ```bash
-g++ -std=c++20 -Iinclude src/neuron.cpp src/trainer.cpp tests/test_main.cpp tests/test_neuron.cpp tests/test_random.cpp -o tests
+g++  -std=c++20 -Wall -Wextra -Iinclude src/neuron.cpp src/trainer.cpp src/serialization.cpp src/inspect.cpp tests/test_main.cpp tests/test_neuron.cpp tests/test_random.cpp tests/test_serialization.cpp tests/test_inspect.cpp -o tests.exe
 ./tests
+
+g++  -std=c++20 -Iinclude src/neuron.cpp src/trainer.cpp src/serialization.cpp src/inspect.cpp examples/mind_portal.cpp -o mind_portal.exe                                         
 
 g++ -std=c++20 -Iinclude src/neuron.cpp src/trainer.cpp examples/logic_gates.cpp -o logic_gates
 ./logic_gates

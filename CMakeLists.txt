@@ -19,8 +19,11 @@ target_compile_options(neroe PRIVATE
 
 # ---- examples ------------------------------------------------------------
 if(NEROE_BUILD_EXAMPLES)
-    add_executable(logic_gates examples/logic_gates.cpp mind_portal examples/mind_portal.cpp)
-    target_link_libraries(logic_gates PRIVATE neroe mind_portal PRIVATE neroe)
+    add_executable(logic_gates examples/logic_gates.cpp)
+    add_executable(mind_portal examples/mind_portal.cpp)
+    
+    target_link_libraries(logic_gates PRIVATE neroe)
+    target_link_libraries(mind_portal PRIVATE neroe)
 endif()
 
 # ---- tests ---------------------------------------------------------------

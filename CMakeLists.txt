@@ -5,8 +5,10 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-option(NEROE_BUILD_EXAMPLES "Build examples" ON): option(NEROE_BUILD_CLI "Build the neroe terminal portal" ON)
-option(NEROE_BUILD_TESTS "Build tests" ON): option(NEROE_BUILD_CLI "Build the neroe terminal portal" ON)
+option(NEROE_BUILD_EXAMPLES "Build examples" ON)
+option(NEROE_BUILD_CLI "Build the neroe terminal portal" ON)
+option(NEROE_BUILD_TESTS "Build tests" ON)
+option(NEROE_BUILD_CLI "Build the neroe terminal portal" ON)
 
 # ---- library -------------------------------------------------------------
 add_library(neroe src/neuron.cpp src/trainer.cpp src/serialization.cpp src/inspect.cpp src/card.cpp)
